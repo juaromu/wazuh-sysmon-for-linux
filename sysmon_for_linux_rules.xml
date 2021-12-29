@@ -1,0 +1,86 @@
+<!--
+ - Sysmon For Linux rules
+ - Created by SOCFortress.
+ - https://www.socfortress.co
+ - info@socfortress.co.
+-->
+
+<group name="linux,sysmon, ">
+    <rule id="200150" level="3">
+        <decoded_as>json</decoded_as>
+        <field name="Event.System.ProviderName">^Linux-Sysmon$</field>
+        <description>Sysmon For Linux</description>
+        <options>no_full_log</options>
+    </rule>
+    <rule id="200151" level="3">
+        <if_sid>200150</if_sid>
+        <field name="Event.System.EventID">^1$</field>
+        <group>sysmon_event1</group>
+        <description>Sysmon - Event 1: Process creation $(Event.EventData.Data.Image)</description>
+        <mitre>
+         <id>T1204</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
+    <rule id="200152" level="3">
+        <if_sid>200150</if_sid>
+        <field name="Event.System.EventID">^3$</field>
+        <description>Sysmon - Event 3: Network connection by $(Event.EventData.Data.Image)</description>
+        <group>sysmon_event3</group>
+        <mitre>
+         <id>T1043</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
+    <rule id="200153" level="3">
+        <if_sid>200150</if_sid>
+        <field name="Event.System.EventID">^5$</field>
+        <description>Sysmon - Event 5: Process terminated $(Event.EventData.Data.Image)</description>
+        <group>sysmon_event5</group>
+        <mitre>
+         <id>T1204</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
+    <rule id="200154" level="3">
+        <if_sid>200150</if_sid>
+        <field name="Event.System.EventID">^9$</field>
+        <description>Sysmon - Event 9: Raw Access Read by $(Event.EventData.Data.Image)</description>
+        <group>sysmon_event9</group>
+        <mitre>
+         <id>T1204</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
+    <rule id="200155" level="3">
+        <if_sid>200150</if_sid>
+        <field name="Event.System.EventID">^11$</field>
+        <description>Sysmon - Event 11: FileCreate by $(Event.EventData.Data.Image)</description>
+	      <group>sysmon_event_11</group>
+        <mitre>
+         <id>T1044</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
+    <rule id="200156" level="3">
+        <if_sid>200150</if_sid>
+        <field name="Event.System.EventID">^16$</field>
+        <description>Sysmon - Event 16: Sysmon config state changed $(Event.EventData.Data.Configuration)</description>
+        <group>sysmon_event_16</group>
+        <mitre>
+         <id>T1562</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
+    <rule id="200157" level="3">
+        <if_sid>200150</if_sid>
+        <field name="Event.System.EventID">^23$</field>
+        <description>Sysmon - Event 23: FileDelete (A file delete was detected) by $(Event.EventData.Data.Image)</description>
+        <group>sysmon_event_23</group>
+        <mitre>
+         <id>T1107</id>
+         <id>T1485</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
+</group>
