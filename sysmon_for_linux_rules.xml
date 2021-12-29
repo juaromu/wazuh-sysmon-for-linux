@@ -83,4 +83,41 @@
         </mitre>
         <options>no_full_log</options>
     </rule>
+<!--Overrides-->
+<!--EventID = 3. Discrad events if Image = /var/ossec/bin/wazuh-agentd-->
+    <rule id="200200" level="1">
+        <if_sid>200152</if_sid>
+        <field name="eventdata.image">wazuh-agentd$</field>
+        <description>Sysmon - Event 3: Network connection by $(eventdata.image)</description>
+        <group>sysmon_event3/group>
+        <mitre>
+         <id>T1107</id>
+         <id>T1485</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
+<!--EventID = 11. Discrad events if Image = /var/ossec/bin/wazuh-agentd-->
+    <rule id="200201" level="1">
+        <if_sid>200155</if_sid>
+        <field name="eventdata.image">wazuh-agentd$</field>
+        <description>Sysmon - Event 11: FileCreate by $(eventdata.image)</description>
+        <group>sysmon_event_11</group>
+        <mitre>
+         <id>T1107</id>
+         <id>T1485</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
+<!--EventID = 23. Discrad events if Image = /var/ossec/bin/wazuh-agentd-->
+    <rule id="200202" level="1">
+        <if_sid>200157</if_sid>
+        <field name="eventdata.image">wazuh-agentd$</field>
+        <description>Sysmon - Event 23: FileDelete (A file delete was detected) by $(eventdata.image)</description>
+        <group>sysmon_event_23</group>
+        <mitre>
+         <id>T1107</id>
+         <id>T1485</id>
+        </mitre>
+        <options>no_full_log</options>
+    </rule>
 </group>
